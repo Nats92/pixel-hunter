@@ -1,4 +1,6 @@
-const templates = [...document.querySelectorAll(`template`)];
+import introMarking from './intro.js';
+
+// const templates = [...document.querySelectorAll(`template`)];
 
 let currScreenNumber = 0;
 
@@ -12,7 +14,7 @@ const clearContainer = (container) => {
 const showScreen = () => {
     const main = document.querySelector(`#main`);
     clearContainer(main);
-    const template = templates[currScreenNumber].content.cloneNode(true);
+    const template = introMarking.cloneNode(true);
     main.appendChild(template);
 };
 
@@ -31,12 +33,6 @@ const prevScreen = (cb) => {
     }
     cb();
 };
-
-const getElementFromTemplate = (template) => {
-    const container = document.createElement(`template`);
-    container.innerHTML = template;
-    return container.content;
-}
 
 window.addEventListener(`keydown`, (evt) => {
     if (evt.ctrlKey && evt.keyCode === 39) {
