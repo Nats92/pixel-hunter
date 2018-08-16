@@ -1,5 +1,5 @@
 import introMarking from './intro.js';
-
+import greetingMarking from './greeting.js';
 // const templates = [...document.querySelectorAll(`template`)];
 
 let currScreenNumber = 0;
