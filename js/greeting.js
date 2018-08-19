@@ -1,4 +1,6 @@
-import getElFromTemplate from './util.js';
+import util from './util.js';
+import rules from './rules.js';
+import showScreen from './show-screen.js';
 
 const greetingTemplate = `
 <section class="greeting central--blur">
@@ -23,4 +25,16 @@ const greetingTemplate = `
 </section>
 `  
 
-export default getElFromTemplate(greetingTemplate);
+const greeting = {
+    // getElement: util.getElFromTemplate(`template`, greetingTemplate),
+    setListeners: () => {
+        const greetingContinue = document.querySelector(`.greeting__continue`);
+        greetingContinue.addEventListener(`click`, rules.showScreen);
+    },
+    showScreen: () => {
+        showScreen(greetingTemplate);
+        greeting.setListeners();
+    }
+}
+
+export default greeting;
