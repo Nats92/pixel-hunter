@@ -1,4 +1,7 @@
-import getElFromTemplate from './util.js';
+import util from './util.js';
+import game1 from './game-1.js';
+import showScreen from './show-screen.js';
+import greeting from './greeting.js';
 
 const rulesTemplate = `
 <header class="header">
@@ -29,7 +32,29 @@ const rulesTemplate = `
     </form>
 </section>
 `  
+const rules = {
+    // getElement: util.getElFromTemplate(`template`, rulesTemplate),
+    setListeners: () => {
+        const back = document.querySelector(`.back`);
+        back.addEventListener(`click`, greeting.showScreen);
+        
+        const field = document.querySelector(`.rules__input`);
+        field.addEventListener(`input`, () => { 
+            if (field.value) {
+                rulesButton.removeAttribute(`disabled`);
+            } else {
+                rulesButton.setAttribute(`disabled`, `disabled`);
+            }
+        })
 
-export default getElFromTemplate(rulesTemplate);
+        const rulesButton = document.querySelector(`.rules__button`);
+        rulesButton.addEventListener(`click`, game1.showScreen);
+    },
+    showScreen: () => { 
+        showScreen(rulesTemplate);
+        rules.setListeners();
+    } 
+}
+export default rules;
 
   
