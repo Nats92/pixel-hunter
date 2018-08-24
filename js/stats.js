@@ -1,4 +1,3 @@
-import util from './util.js';
 import showScreen from './show-screen.js';
 import greeting from './greeting.js';
 
@@ -117,13 +116,15 @@ const statsTemplate = `
 `
 const stats = {
     // getElement: util.getElFromTemplate(`template`, statsTemplate),
-    setListeners: () => {
+    setListeners() {
         const back = document.querySelector(`.back`);
-        back.addEventListener(`click`, greeting.showScreen);
+        back.addEventListener(`click`, () => {
+            greeting.showScreen();
+        });
     },
-    showScreen: () => {
+    showScreen() {
         showScreen(statsTemplate);
-        stats.setListeners();
+        this.setListeners();
     }
 }
 export default stats;

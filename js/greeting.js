@@ -1,9 +1,19 @@
-import util from './util.js';
+import Screen from './Screen.js';
 import rules from './rules.js';
-import showScreen from './show-screen.js';
 
-const greetingTemplate = `
-<section class="greeting central--blur">
+class Greeting extends Screen {
+    constructor(template) {
+        super(template);
+    }
+
+    setListeners() {
+        const greetingContinue = document.querySelector(`.greeting__continue`);
+        greetingContinue.addEventListener(`click`, () => {
+            rules.showScreen();
+        });
+    }
+}
+const greetingTemplate = `<section class="greeting central--blur">
     <img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
     <div class="greeting__asterisk asterisk"><span class="visually-hidden">Я просто красивая звёздочка</span>*</div>
     <div class="greeting__challenge">
@@ -22,19 +32,6 @@ const greetingTemplate = `
             <use xlink:href="img/sprite.svg#arrow-right"></use>
         </svg>
     </button>
-</section>
-`  
+</section>`  
 
-const greeting = {
-    // getElement: util.getElFromTemplate(`template`, greetingTemplate),
-    setListeners: () => {
-        const greetingContinue = document.querySelector(`.greeting__continue`);
-        greetingContinue.addEventListener(`click`, rules.showScreen);
-    },
-    showScreen: () => {
-        showScreen(greetingTemplate);
-        greeting.setListeners();
-    }
-}
-
-export default greeting;
+export default new Greeting(greetingTemplate);

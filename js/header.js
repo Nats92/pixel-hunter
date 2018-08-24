@@ -1,12 +1,10 @@
-import util from './util.js';
 
 const initialState = Object.freeze({
     time: 0,
     lives: 2
 });
 
-const headerTemplate = (state) => `
-<header class="header">
+const headerTemplate = (state) => `<header class="header">
     <button class="back">
         <span class="visually-hidden">Вернуться к началу</span>
         <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -25,7 +23,7 @@ const headerTemplate = (state) => `
                 .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">`)
                 .join(``))}
     </div>
-</header>
-`
+</header>`
+
 export default headerTemplate(initialState);
 

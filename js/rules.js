@@ -1,10 +1,31 @@
-import util from './util.js';
 import game1 from './game-1.js';
-import showScreen from './show-screen.js';
+import Screen from './Screen.js';
 import greeting from './greeting.js';
 
-const rulesTemplate = `
-<header class="header">
+class Rules extends Screen { 
+    constructor(template) {
+        super(template);
+    }
+
+    setListeners() {
+        this.backToScreenListener(greeting);
+
+        const field = document.querySelector(`.rules__input`);
+        field.addEventListener(`input`, () => { 
+            if (field.value) {
+                rulesButton.removeAttribute(`disabled`);
+            } else {
+                rulesButton.setAttribute(`disabled`, `disabled`);
+            }
+        })
+
+        const rulesButton = document.querySelector(`.rules__button`);
+        rulesButton.addEventListener(`click`, () => {
+            game1.showScreen();
+        });
+    }
+}
+const rulesTemplate = `<header class="header">
     <button class="back">
         <span class="visually-hidden">Вернуться к началу</span>
         <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -30,31 +51,8 @@ const rulesTemplate = `
         <input class="rules__input" type="text" placeholder="Ваше Имя">
         <button class="rules__button  continue" type="submit" disabled>Go!</button>
     </form>
-</section>
-`  
-const rules = {
-    // getElement: util.getElFromTemplate(`template`, rulesTemplate),
-    setListeners: () => {
-        const back = document.querySelector(`.back`);
-        back.addEventListener(`click`, greeting.showScreen);
-        
-        const field = document.querySelector(`.rules__input`);
-        field.addEventListener(`input`, () => { 
-            if (field.value) {
-                rulesButton.removeAttribute(`disabled`);
-            } else {
-                rulesButton.setAttribute(`disabled`, `disabled`);
-            }
-        })
+</section>`  
 
-        const rulesButton = document.querySelector(`.rules__button`);
-        rulesButton.addEventListener(`click`, game1.showScreen);
-    },
-    showScreen: () => { 
-        showScreen(rulesTemplate);
-        rules.setListeners();
-    } 
-}
-export default rules;
+export default new Rules(rulesTemplate);
 
   
